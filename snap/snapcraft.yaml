@@ -1,0 +1,65 @@
+name: ren2date
+version: '1.0.0'
+summary: Rename the provided file by adding today's date as a timestamp
+description: |
+  TBD
+
+grade: stable
+confinement: strict
+base: core22
+
+title: Ren2Date
+website: https://github.com/frossm/ren2date
+issues: https://github.com/frossm/ren2date/issues
+license: MIT
+
+# Enable faster LZO compression
+compression: lzo
+
+# Ignore useless library warnings
+lint:
+  ignore:
+    - library
+    
+apps:
+  fcal:
+    command: ren2date-wrapper
+    plugs:
+       - network
+
+parts:
+  wrapper:
+    plugin: dump
+    source: snap/local
+    source-type: local
+
+  library:
+    plugin: maven
+    source: https://github.com/frossm/library.git
+    source-type: git
+    source-tag: 'v2023.12.03'
+    maven-parameters:
+       - install
+       
+    build-packages:
+      - maven
+      - openjdk-11-jdk-headless
+
+  ren2date:
+    plugin: maven
+    source: https://github.com/frossm/cal.git
+    source-branch: master
+    source-type: git
+    after:
+       - library
+       
+    build-packages:
+      - maven
+      - openjdk-11-jdk-headless
+
+    stage-packages:
+      - openjdk-11-jre-headless
+        
+    override-prime: |
+      snapcraftctl prime
+      rm -vf usr/lib/jvm/java-11-openjdk-*/lib/security/blacklisted.certs
