@@ -19,7 +19,7 @@ base: core22
 title: Ren2Date
 website: https://github.com/frossm/ren2date
 issues: https://github.com/frossm/ren2date/issues
-icon: graphics/PostsIt-512.jpg
+icon: graphics/PostIt-512.jpg
 license: MIT
 
 # Enable faster LZO compression
