@@ -1,10 +1,9 @@
 <p align="center"> 
-    <img width="70%" src ="https://github.com/frossm/ren2date/raw/master/graphics/PostIt.jpg">
+    <img width="70%" src ="https://github.com/frossm/ren2date/raw/master/graphics/ScreenShot.jpg">
 </p> 
-
 # Ren2Date
 
-Ren2Date will rename a file in various ways, with the current date & time.  Useful for log files, statements, and other time based data.
+<img align="right" width="200" src="https://github.com/frossm/ren2date/raw/master/graphics/PostIt.jpg">Ren2Date will rename a file in various ways, with the current date & time.  Useful for log files, statements, and other time based data.
 
 There are two ways to choose the name of the renamed file.  The first is to simply choose one of the pre-defined patterns using the `-p #` switch.  I'm happy to add other pre-defined style if you like, just create an issue in [GitHub](https://github.com/frossm/ren2date/issues).
 
