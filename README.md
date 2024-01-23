@@ -1,4 +1,8 @@
-# ren2date
+<p align="center"> 
+    <img width="70%" src ="https://github.com/frossm/ren2date/raw/master/graphics/PostIt.jpg">
+</p> 
+
+# Ren2Date
 
 Ren2Date will rename a file in various ways, with the current date & time.  Useful for log files, statements, and other time based data.
 
