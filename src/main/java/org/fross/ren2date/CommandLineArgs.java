@@ -42,21 +42,23 @@ public class CommandLineArgs {
    // ---------------------------------------------------------------------------------------------
    // Define command line options that can be used
    // ---------------------------------------------------------------------------------------------
-
-   @Parameter(names = {"-h", "-?", "--help"}, help = true, description = "Display Ren2Date help and exit")
-   protected static boolean clHelp = false;
-
-   @Parameter(names = {"-z", "--no-color"}, description = "Disable colorized output")
-   protected static boolean clNoColor = false;
-
-   @Parameter(names = {"-v", "--version"}, description = "Show current program version and latest release on GitHub")
-   protected static boolean clVersion = false;
-
-   @Parameter(names = {"-D", "--debug"}, description = "Turn on Debug mode to display extra program information")
-   protected static boolean clDebug = false;
-
    @Parameter(names = {"-p", "--predefined-style"}, description = "Select a pre-defined style - see help for details")
    protected static int clPredefinedStyle = 0;
+
+   @Parameter(names = {"-c", "--custom-style"}, description = "Use a custom style.  See help for details")
+   protected static String clCustomStyle = "";
+
+   @Parameter(names = {"-D", "--debug"}, description = "Turn on Debug mode to display extra program information")
+   protected boolean clDebug = false;
+
+   @Parameter(names = {"-v", "--version"}, description = "Show current program version and latest release on GitHub")
+   protected boolean clVersion = false;
+
+   @Parameter(names = {"-z", "--no-color"}, description = "Disable colorized output")
+   protected boolean clNoColor = false;
+
+   @Parameter(names = {"-h", "-?", "--help"}, help = true, description = "Display Ren2Date help and exit")
+   protected boolean clHelp = false;
 
    @Parameter(description = "File to rename")
    protected List<String> clFilename = new ArrayList<>();
@@ -104,6 +106,24 @@ public class CommandLineArgs {
          System.exit(0);
       }
 
+   }
+
+   /**
+    * queryCustomStyle():  Return the custom style string entered by the user
+    *
+    * @return Custom style string
+    */
+   protected static String queryCustomStyle() {
+      return clCustomStyle;
+   }
+
+   /**
+    * queryPredefinedStyle():  Return the predefined style number selected
+    *
+    * @return predefined style selection number
+    */
+   protected static int queryPredefinedStyle() {
+      return clPredefinedStyle;
    }
 
 }

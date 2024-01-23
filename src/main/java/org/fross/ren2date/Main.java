@@ -69,12 +69,14 @@ public class Main {
       for (int i = 0; i < CommandLineArgs.cli.clFilename.size(); i++) {
          String oldName = CommandLineArgs.cli.clFilename.get(i);
          String newName = NameProcessing.getNewName(oldName);
+
          Output.printColorln(Ansi.Color.YELLOW, "Directory:\t" + NameProcessing.getFilePath(oldName));
+         Output.printColorln(Ansi.Color.WHITE, "Style:\t\t'" + StyleTemplates.queryPredefinedStyle() + "'");
          Output.printColorln(Ansi.Color.WHITE, "Renaming\t'" + oldName + "'  ->  '" + newName + "'");
 
          // Create the file objects from the string names
          File oldFile = new File(oldName).getAbsoluteFile();
-         File newFile = new File(newName);
+         File newFile = new File(NameProcessing.getFilePath(oldName) + "/" + newName);
 
          // Ensure that the old file exists and the new name doesn't
          if (!oldFile.exists()) {

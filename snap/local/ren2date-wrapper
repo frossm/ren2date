@@ -1,5 +1,5 @@
 #!/bin/bash
 #
-# Script is a wrapper which runs application in a bash script with the needed options
+# Script is a wrapper which runs the application in a bash shell script with the needed options
 #
-exec $SNAP/bin/java -Djava.util.prefs.userRoot="$SNAP_USER_DATA" -jar $SNAP/jar/ren2date.jar "$@"
+exec "$SNAP/bin/java" -Djava.util.prefs.userRoot="$SNAP_USER_DATA" -jar "$SNAP/jar/ren2date.jar" "$@"

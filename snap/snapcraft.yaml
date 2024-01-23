@@ -1,8 +1,9 @@
 name: ren2date
-version: '1.0.0'
+version: '1.0.1'
 summary: Rename the provided file by adding today's date as a timestamp
 description: |
-  TBD
+  Ren2Date will rename a file, or a group of files with the current date/time.
+  User can select a pre-defined style or define a custom one unique to the situation.
 
 grade: stable
 confinement: strict
@@ -20,9 +21,9 @@ compression: lzo
 lint:
   ignore:
     - library
-    
+
 apps:
-  fcal:
+  ren2date:
     command: ren2date-wrapper
     plugs:
        - network
@@ -37,10 +38,10 @@ parts:
     plugin: maven
     source: https://github.com/frossm/library.git
     source-type: git
-    source-tag: 'v2023.12.03'
+    source-tag: 'v2024.01.22'
     maven-parameters:
        - install
-       
+
     build-packages:
       - maven
       - openjdk-11-jdk-headless
@@ -52,14 +53,14 @@ parts:
     source-type: git
     after:
        - library
-       
+
     build-packages:
       - maven
       - openjdk-11-jdk-headless
 
     stage-packages:
       - openjdk-11-jre-headless
-        
+
     override-prime: |
       snapcraftctl prime
       rm -vf usr/lib/jvm/java-11-openjdk-*/lib/security/blacklisted.certs

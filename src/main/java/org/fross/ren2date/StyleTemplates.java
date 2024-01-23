@@ -29,18 +29,15 @@ import org.fross.library.Output;
 import java.util.HashMap;
 import java.util.Map;
 
-@SuppressWarnings("ALL")
 public class StyleTemplates {
-   static String predefinedStyle = "";
+   static String selectedStyle = "";
+   static Map<String, String> templateLibrary = new HashMap<>();
 
    /**
     * CreateTemplates(): Build the template library with the predefined styles
     */
    protected static void CreateTemplates() {
       try {
-         // Build map of number (key) and the style (value)
-         Map<String, String> templateLibrary = new HashMap<>();
-
          // Populate the templates with the predefined styles
          templateLibrary.put("0", "YYYY-MM-DD_FILENAME.EXT");
          templateLibrary.put("1", "YYYY-MM-DD-FILENAME.EXT");
@@ -59,18 +56,18 @@ public class StyleTemplates {
          templateLibrary.put("14", "FILENAME_MM_DD_YYYY.EXT");
          templateLibrary.put("15", "FILENAME-MMDDYYYY.EXT");
          templateLibrary.put("16", "FILENAME_MMDDYYYY.EXT");
+         templateLibrary.put("17", "YYYY-MM-DD_HH-NN-SS_FILENAME.EXT");
 
-         predefinedStyle = templateLibrary.get(String.valueOf(CommandLineArgs.clPredefinedStyle));
+         selectedStyle = templateLibrary.get(String.valueOf(CommandLineArgs.queryPredefinedStyle()));
 
-         Output.debugPrintln("Predefined style selected: " + CommandLineArgs.clPredefinedStyle + "        template: '" + predefinedStyle + "'");
+         Output.debugPrintln("Predefined style selected: " + CommandLineArgs.queryPredefinedStyle() + "     template: '" + selectedStyle + "'");
 
          // If we don't understand the argument to -p, throw a fatal error
-         if (predefinedStyle.isEmpty()) throw new Exception();
+         if (selectedStyle.isEmpty()) throw new Exception();
 
       } catch (Exception ex) {
-         Output.fatalError("Unknown pre-defined style: '" + CommandLineArgs.clPredefinedStyle + "'. Please see the help (-h)", 1);
+         Output.fatalError("Unknown pre-defined style: '" + CommandLineArgs.queryPredefinedStyle() + "'. Please see the help (-h)", 1);
       }
-
    }
 
    /**
@@ -79,7 +76,7 @@ public class StyleTemplates {
     * @return The template to use for renaming
     */
    public static String queryPredefinedStyle() {
-      return predefinedStyle;
+      return selectedStyle;
    }
 
 }

@@ -56,13 +56,17 @@ public class NameProcessing {
       // Create the templates
       StyleTemplates.CreateTemplates();
 
-      // Replace the template placeholders with today's date
-      String selectedStyle = StyleTemplates.queryPredefinedStyle();
+      String selectedStyle = getStyle();
+
+      // Build the new name by replacing the placeholder with the current date
       String newName = selectedStyle.replaceAll("YYYY", String.format("%d", Date.getCurrentYear()));
       newName = newName.replaceAll("MM", String.format("%02d", Date.getCurrentMonth()));
       newName = newName.replaceAll("DD", String.format("%02d", Date.getCurrentDay()));
+      newName = newName.replaceAll("HH", String.format("%02d", Date.getCurrentHour()));
+      newName = newName.replaceAll("NN", String.format("%02d", Date.getCurrentMinute()));
+      newName = newName.replaceAll("SS", String.format("%02d", Date.getCurrentSecond()));
 
-      // Replace the name
+      // Replace the file name and extension
       newName = newName.replaceAll("FILENAME", getBaseName(fileName));
       if (getExtension(fileName).isEmpty()) {
          // There is no extension so remove the dot
@@ -72,5 +76,16 @@ public class NameProcessing {
       }
 
       return newName;
+   }
+
+   private static String getStyle() {
+      // Get the selected style either via a custom or pre-defined selection on the command line
+      String selectedStyle;
+      if (!CommandLineArgs.queryCustomStyle().isEmpty()) {
+         selectedStyle = CommandLineArgs.queryCustomStyle();
+      } else {
+         selectedStyle = StyleTemplates.queryPredefinedStyle();
+      }
+      return selectedStyle;
    }
 }

@@ -7,7 +7,7 @@
     <name>ren2date</name>
     <groupId>org.fross</groupId>
     <artifactId>ren2date</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <packaging>jar</packaging>
 
     <url>https://github.com/frossm/ren2date</url>
@@ -116,6 +116,10 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.2.3</version>
+                <configuration>
+                    <forkCount>3</forkCount>
+                    <reuseForks>true</reuseForks>
+                </configuration>
             </plugin>
 
             <!-- ========================================================================================== -->
@@ -215,7 +219,7 @@
         </plugins>
     </build>
 
-    <!-- Define my custom Github repository where Library lives -->
+    <!-- Define my custom GitHub repository where Library lives -->
     <repositories>
         <repository>
             <id>github</id>
@@ -233,7 +237,7 @@
         <dependency>
             <groupId>org.fross</groupId>
             <artifactId>library</artifactId>
-            <version>2023.12.03</version>
+            <version>2024.01.22</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/com.beust/jcommander -->
