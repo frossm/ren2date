@@ -4,11 +4,11 @@
 
 # Ren2Date
 
-<img align="right" width="200" src="https://github.com/frossm/ren2date/raw/master/graphics/PostIt.jpg">Ren2Date will rename a file in various ways, with the current date & time.  Useful for log files, statements, and other time based data.
+Ren2Date will rename a file in various ways, with the current date & time.  Useful for log files, statements, and other time based data.
 
 There are two ways to choose the name of the renamed file.  The first is to simply choose one of the pre-defined patterns using the `-p #` switch.  I'm happy to add other pre-defined style if you like, just create an issue in [GitHub](https://github.com/frossm/ren2date/issues).
 
-The second, and more flexible way, it so create a custom template.  Ren2Date will replace the placeholders with the current year, month, day, hour, min, or seconds.  This is defined with the `-c PLACEHOLDER` format.  Below is the usage information for Ren2Date.
+<img align="right" width="200" src="https://github.com/frossm/ren2date/raw/master/graphics/PostIt.jpg">The second, and more flexible way, it so create a custom template.  Ren2Date will replace the placeholders with the current year, month, day, hour, min, or seconds.  This is defined with the `-c PLACEHOLDER` format.  Below is the usage information for Ren2Date.
 
 Please note that for SNAP installs, you just execute `ren2date` and do not need the java -jar syntax.  Actually, for SNAP, you don't even have to have Java installed on yoru system as the SNAP package contains everything needed to execute.  However, you may need to give the snap access if the renames occurs outside of the home direction.
 
