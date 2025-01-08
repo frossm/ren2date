@@ -7,7 +7,7 @@
     <name>ren2date</name>
     <groupId>org.fross</groupId>
     <artifactId>ren2date</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
     <packaging>jar</packaging>
 
     <url>https://github.com/frossm/ren2date</url>

@@ -90,13 +90,17 @@ public class Main {
          }
 
          // Rename the file
-         if (oldFile.renameTo(newFile)) {
-            Output.printColorln(Ansi.Color.GREEN, "Rename successful");
-         } else {
-            Output.printColorln(Ansi.Color.RED, "Rename unsuccessful");
+         try {
+            if (oldFile.renameTo(newFile)) {
+               Output.printColorln(Ansi.Color.GREEN, "Rename successful");
+            }
+
+         } catch (SecurityException ex) {
+            Output.printColorln(Ansi.Color.RED, String.format("Not authorized to rename '%s'\n", oldName));
+         } catch (Exception ex) {
+            Output.printColorln(Ansi.Color.RED, "Rename unsuccessful\n");
          }
 
-         Output.println("");
       }
 
    }
