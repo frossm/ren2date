@@ -66,7 +66,7 @@ public class Main {
 
       } catch (IOException ex) {
          // Note: Since terminal failed, we use System.out as a fallback
-         Output.println("Unable to create a terminal. Visuals will be impacted.");
+         Output.printColorln(Output.RED, "Unable to create a terminal. Visuals will be impacted.");
       }
 
       // Process application level properties file
@@ -95,9 +95,11 @@ public class Main {
          String oldNameStr = CommandLineArgs.cli.clFilename.get(i);
          String newNameStr = NameProcessing.getNewName(oldNameStr);
 
-         Output.printColorln(Output.YELLOW, "Directory:\t" + NameProcessing.getFilePath(oldNameStr));
-         Output.printColorln(Output.WHITE, "Style:\t\t'" + StyleTemplates.queryPredefinedStyle() + "'");
-         Output.printColorln(Output.WHITE, "Renaming\t'" + oldNameStr + "'  ->  '" + newNameStr + "'");
+         if (!CommandLineArgs.cli.clQuiet) {
+            Output.printColorln(Output.YELLOW, "Directory:\t" + NameProcessing.getFilePath(oldNameStr));
+            Output.printColorln(Output.WHITE, "Style:\t\t'" + StyleTemplates.queryPredefinedStyle() + "'");
+            Output.printColorln(Output.WHITE, "Renaming\t'" + oldNameStr + "'  ->  '" + newNameStr + "'");
+         }
 
          // Create the file objects from the string names
          File oldFile = new File(oldNameStr).getAbsoluteFile();
@@ -116,12 +118,12 @@ public class Main {
 
          // Rename the file
          try {
-            if (oldFile.renameTo(newFile)) {
+            if (oldFile.renameTo(newFile) && !CommandLineArgs.cli.clQuiet) {
                Output.printColorln(Output.GREEN, "Rename successful");
             }
 
          } catch (SecurityException ex) {
-            Output.printColorln(Output.RED, String.format("Not authorized to rename '%s'\n", oldNameStr));
+            Output.printColorln(Output.RED, String.format("FAIL: Not authorized to rename '%s'\n", oldNameStr));
          } catch (Exception ex) {
             Output.printColorln(Output.RED, "FAIL: Rename unsuccessful\n");
          }

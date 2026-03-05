@@ -54,6 +54,7 @@ public class Help {
       Output.printColorln(Output.WHITE, " -c STYLE    Custom style. See below for details");
       Output.printColorln(Output.WHITE, " -D          Start in debug mode");
       Output.printColorln(Output.WHITE, " -v          Display the program version and latest GitHub Cal release");
+      Output.printColorln(Output.WHITE, " -q          Quiet mode: Only errors / failures will be displayed");
       Output.printColorln(Output.WHITE, " -z          Disable colorized output");
       Output.printColorln(Output.WHITE, " -h or -?    Display this help information");
 

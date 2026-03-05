@@ -53,6 +53,9 @@ public class CommandLineArgs {
    @Parameter(names = {"-v", "--version"}, description = "Show current program version and latest release on GitHub")
    protected boolean clVersion = false;
 
+   @Parameter(names = {"-q", "--quiet"}, description = "Only output failure / error messages")
+   protected boolean clQuiet = false;
+
    @Parameter(names = {"-z", "--no-color"}, description = "Disable colorized output")
    protected boolean clNoColor = false;
 
