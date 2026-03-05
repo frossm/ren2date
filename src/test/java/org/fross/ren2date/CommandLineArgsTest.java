@@ -1,7 +1,7 @@
 /*--------------------------------------------------------------------------------
  *  Ren2Date - Rename the provided file with a current date timestamp
  *
- *  Copyright (c) 2004-2024 Michael Fross
+ *  Copyright (c) 2004-2026 Michael Fross
  *
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
  *  of this software and associated documentation files (the "Software"), to deal

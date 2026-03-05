@@ -1,7 +1,7 @@
 /*--------------------------------------------------------------------------------
  *  Ren2Date - Rename the provided file with a current date timestamp
  *
- *  Copyright (c) 2004-2024 Michael Fross
+ *  Copyright (c) 2004-2026 Michael Fross
  *
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
  *  of this software and associated documentation files (the "Software"), to deal
@@ -30,7 +30,6 @@ import com.beust.jcommander.ParameterException;
 import org.fross.library.Debug;
 import org.fross.library.GitHub;
 import org.fross.library.Output;
-import org.fusesource.jansi.Ansi;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -88,10 +87,10 @@ public class CommandLineArgs {
 
       // Version Switch
       if (cli.clVersion) {
-         Output.printColorln(Ansi.Color.WHITE, "Ren2Date Version: v" + Main.VERSION);
-         Output.printColorln(Ansi.Color.CYAN, Main.COPYRIGHT);
-         Output.printColorln(Ansi.Color.WHITE, "\nLatest Release on GitHub: " + GitHub.updateCheck("ren2date"));
-         Output.printColorln(Ansi.Color.CYAN, "HomePage: https://github.com/frossm/ren2date");
+         Output.printColorln(Output.WHITE, "Ren2Date Version: v" + Main.VERSION);
+         Output.printColorln(Output.CYAN, Main.COPYRIGHT);
+         Output.printColorln(Output.WHITE, "\nLatest Release on GitHub: " + GitHub.updateCheck("ren2date"));
+         Output.printColorln(Output.CYAN, "HomePage: https://github.com/frossm/ren2date");
          System.exit(0);
       }
 

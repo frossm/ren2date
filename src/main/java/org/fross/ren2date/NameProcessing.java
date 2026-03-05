@@ -1,7 +1,7 @@
 /*--------------------------------------------------------------------------------
  *  Ren2Date - Rename the provided file with a current date timestamp
  *
- *  Copyright (c) 2004-2024 Michael Fross
+ *  Copyright (c) 2004-2026 Michael Fross
  *
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
  *  of this software and associated documentation files (the "Software"), to deal
@@ -31,7 +31,6 @@ import org.fross.library.Output;
 public class NameProcessing {
    public static String getFilePath(String fileName) {
       fileName = FilenameUtils.normalizeNoEndSeparator(fileName, false);
-
       String p = FilenameUtils.getFullPathNoEndSeparator(fileName);
 
       // If path is empty, add the current working directory
@@ -52,9 +51,6 @@ public class NameProcessing {
 
    public static String getNewName(String fileName) {
       Output.debugPrintln(String.format("Provided: %s  | Path: %s  | Base: %s  | Ext: %s", fileName, getFilePath(fileName), getBaseName(fileName), getExtension(fileName)));
-
-      // Create the templates
-      StyleTemplates.CreateTemplates();
 
       String selectedStyle = getStyle();
 

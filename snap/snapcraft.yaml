@@ -1,5 +1,5 @@
 name: ren2date
-version: '1.0.2'
+version: '2.0.0'
 summary: Rename files with predefined or custom time stamps
 description: |
   Ren2Date is an easy to use flexible time stamping tool
@@ -14,7 +14,7 @@ description: |
 
 grade: stable
 confinement: strict
-base: core22
+base: core24
 
 title: Ren2Date
 website: https://github.com/frossm/ren2date
@@ -22,54 +22,47 @@ issues: https://github.com/frossm/ren2date/issues
 icon: graphics/PostIt-512.jpg
 license: MIT
 
+platforms:
+  amd64:
+
 # Enable faster LZO compression
 compression: lzo
-
-# Ignore useless library warnings
-lint:
-  ignore:
-    - library
 
 apps:
   ren2date:
     command: ren2date-wrapper
+    environment:
+      PATH: $SNAP/usr/lib/jvm/java-21-openjdk-amd64/bin:$PATH
+      JAVA_HOME: $SNAP/usr/lib/jvm/java-21-openjdk-amd64
+
     plugs:
-       - network
-       - home
+      - network
+      - home
 
 parts:
-  wrapper:
-    plugin: dump
-    source: snap/local
-    source-type: local
+  rpncalc:
+    plugin: nil
+    source: .
+    build-attributes: [ network ]
 
-  library:
-    plugin: maven
-    source: https://github.com/frossm/library.git
-    source-type: git
-    source-tag: 'v2024.01.22'
-    maven-parameters:
-       - install
+    override-build: |
+      # Ensure that gradlew is executable
+      chmod +x gradlew
 
-    build-packages:
-      - maven
-      - openjdk-11-jdk-headless
+      # Build the application
+      ./gradlew shadowJar -x test --console=plain
 
-  ren2date:
-    plugin: maven
-    source: https://github.com/frossm/ren2date.git
-    source-branch: master
-    source-type: git
-    after:
-       - library
+      # Move the shadowJar to the right place
+      mkdir -p $SNAPCRAFT_PART_INSTALL/jar
+      cp build/libs/*.jar $SNAPCRAFT_PART_INSTALL/jar/ren2date.jar
+
+      # Move the wrapper and ensure it's executable
+      cp $SNAPCRAFT_PROJECT_DIR/snap/local/ren2date-wrapper $SNAPCRAFT_PART_INSTALL/
+      chmod +x $SNAPCRAFT_PART_INSTALL/ren2date-wrapper
 
     build-packages:
-      - maven
-      - openjdk-11-jdk-headless
+      - gradle
+      - openjdk-21-jdk-headless
 
     stage-packages:
-      - openjdk-11-jre-headless
-
-    override-prime: |
-      snapcraftctl prime
-      rm -vf usr/lib/jvm/java-11-openjdk-*/lib/security/blacklisted.certs
+      - openjdk-21-jre-headless

@@ -1,7 +1,7 @@
 /*--------------------------------------------------------------------------------
  *  Ren2Date - Rename the provided file with a current date timestamp
  *
- *  Copyright (c) 2004-2024 Michael Fross
+ *  Copyright (c) 2004-2026 Michael Fross
  *
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
  *  of this software and associated documentation files (the "Software"), to deal
@@ -24,8 +24,10 @@
  *------------------------------------------------------------------------------*/
 package org.fross.ren2date;
 
+import org.fross.library.Date;
 import org.fross.library.Output;
-import org.fusesource.jansi.Ansi;
+import org.jline.terminal.Terminal;
+import org.jline.terminal.TerminalBuilder;
 
 import java.io.File;
 import java.io.IOException;
@@ -36,6 +38,7 @@ public class Main {
    protected static String VERSION = "";
    protected static String COPYRIGHT = "";
    public static final String PROPERTIES_FILE = "app.properties";
+   public static Terminal terminal = null;
 
 
    /**
@@ -44,15 +47,37 @@ public class Main {
     * @param args Command line arguments provided by the user
     */
    public static void main(String[] args) {
+      // Silence the following JLine warning line when you start
+      // WARNING: Unable to create a system terminal, creating a dumb terminal
+      java.util.logging.LogManager.getLogManager().reset();
+      java.util.logging.Logger.getLogger("org.jline").setLevel(java.util.logging.Level.OFF);
+
+      // Force JLine to assume the terminal supports ANSI color and movement
+      System.setProperty("org.jline.terminal.type", "xterm-256color");
+
+      // Create a terminal used for input and output with JLine
+      try {
+         // This will print the actual reason (like "Missing library" or "Access Denied") to the console
+         System.setProperty("org.jline.terminal.debug", "true");
+         terminal = TerminalBuilder.builder().system(true).build();
+
+         // Let Output and Input classes know which terminal to use
+         Output.setTerminal(terminal);
+
+      } catch (IOException ex) {
+         // Note: Since terminal failed, we use System.out as a fallback
+         Output.println("Unable to create a terminal. Visuals will be impacted.");
+      }
+
       // Process application level properties file
-      // Update properties from Maven at build time:
+      // Update properties from the build system when running:
       // https://stackoverflow.com/questions/3697449/retrieve-version-from-maven-pom-xml-in-code
       try {
          InputStream iStream = Main.class.getClassLoader().getResourceAsStream(PROPERTIES_FILE);
          Properties prop = new Properties();
          prop.load(iStream);
          VERSION = prop.getProperty("Application.version");
-         COPYRIGHT = "Copyright " + prop.getProperty("Application.inceptionYear") + "-" + org.fross.library.Date.getCurrentYear() + " by Michael Fross";
+         COPYRIGHT = "Copyright " + prop.getProperty("Application.inceptionYear") + "-" + Date.getCurrentYear() + " by Michael Fross";
       } catch (IOException ex) {
          Output.fatalError("Unable to read property file '" + PROPERTIES_FILE + "'", 3);
       }
@@ -67,38 +92,38 @@ public class Main {
 
       // Loop through each filename provided on the command line and rename it
       for (int i = 0; i < CommandLineArgs.cli.clFilename.size(); i++) {
-         String oldName = CommandLineArgs.cli.clFilename.get(i);
-         String newName = NameProcessing.getNewName(oldName);
+         String oldNameStr = CommandLineArgs.cli.clFilename.get(i);
+         String newNameStr = NameProcessing.getNewName(oldNameStr);
 
-         Output.printColorln(Ansi.Color.YELLOW, "Directory:\t" + NameProcessing.getFilePath(oldName));
-         Output.printColorln(Ansi.Color.WHITE, "Style:\t\t'" + StyleTemplates.queryPredefinedStyle() + "'");
-         Output.printColorln(Ansi.Color.WHITE, "Renaming\t'" + oldName + "'  ->  '" + newName + "'");
+         Output.printColorln(Output.YELLOW, "Directory:\t" + NameProcessing.getFilePath(oldNameStr));
+         Output.printColorln(Output.WHITE, "Style:\t\t'" + StyleTemplates.queryPredefinedStyle() + "'");
+         Output.printColorln(Output.WHITE, "Renaming\t'" + oldNameStr + "'  ->  '" + newNameStr + "'");
 
          // Create the file objects from the string names
-         File oldFile = new File(oldName).getAbsoluteFile();
-         File newFile = new File(NameProcessing.getFilePath(oldName) + "/" + newName);
+         File oldFile = new File(oldNameStr).getAbsoluteFile();
+         File newFile = new File(NameProcessing.getFilePath(oldNameStr) + "/" + newNameStr);
 
          // Ensure that the old file exists and the new name doesn't
          if (!oldFile.exists()) {
-            Output.printColorln(Ansi.Color.RED, oldName + " does not exist. Skipping rename...\n");
+            Output.printColorln(Output.RED, "FAIL: " + oldNameStr + " does not exist. Skipping rename...\n");
             continue;
 
             // Ensure that the destination filename does not exist
          } else if (newFile.exists()) {
-            Output.printColorln(Ansi.Color.RED, newName + "' name already exists. Skipping rename...\n");
+            Output.printColorln(Output.RED, "FAIL: " + newNameStr + "' name already exists. Skipping rename...\n");
             continue;
          }
 
          // Rename the file
          try {
             if (oldFile.renameTo(newFile)) {
-               Output.printColorln(Ansi.Color.GREEN, "Rename successful");
+               Output.printColorln(Output.GREEN, "Rename successful");
             }
 
          } catch (SecurityException ex) {
-            Output.printColorln(Ansi.Color.RED, String.format("Not authorized to rename '%s'\n", oldName));
+            Output.printColorln(Output.RED, String.format("Not authorized to rename '%s'\n", oldNameStr));
          } catch (Exception ex) {
-            Output.printColorln(Ansi.Color.RED, "Rename unsuccessful\n");
+            Output.printColorln(Output.RED, "FAIL: Rename unsuccessful\n");
          }
 
       }

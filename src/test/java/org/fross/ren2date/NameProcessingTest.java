@@ -1,7 +1,7 @@
 /*--------------------------------------------------------------------------------
  *  Ren2Date - Rename the provided file with a current date timestamp
  *
- *  Copyright (c) 2004-2024 Michael Fross
+ *  Copyright (c) 2004-2026 Michael Fross
  *
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
  *  of this software and associated documentation files (the "Software"), to deal
@@ -25,13 +25,22 @@
 package org.fross.ren2date;
 
 import org.fross.library.Date;
+import org.fross.library.Output;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.Calendar;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
 class NameProcessingTest {
+   // Set up the tests before each runs
+   @BeforeEach
+   void setup() {
+      CommandLineArgs.clCustomStyle = "";
+      CommandLineArgs.clPredefinedStyle = 0;
+   }
+
    @Test
    void getBaseName() {
       assertEquals("", NameProcessing.getBaseName(".vimrc"));
@@ -75,19 +84,29 @@ class NameProcessingTest {
       int day = Date.getCurrentDay();
 
       String fname = "FilenameHere.ext";
+      Output.println(String.format("Original: %-20s  New: %s", fname, NameProcessing.getNewName(fname)));
       assertEquals(String.format("%04d-%02d-%02d_%s", year, month, day, fname), NameProcessing.getNewName(fname));
 
       fname = ".vimrc";
+      Output.println(String.format("Original: %-20s  New: %s", fname, NameProcessing.getNewName(fname)));
       assertEquals(String.format("%04d-%02d-%02d_%s", year, month, day, fname), NameProcessing.getNewName(fname));
 
       fname = "name.123.456.789";
+      Output.println(String.format("Original: %-20s  New: %s", fname, NameProcessing.getNewName(fname)));
       assertEquals(String.format("%04d-%02d-%02d_%s", year, month, day, fname), NameProcessing.getNewName(fname));
 
       fname = "FilenameHere.ext";
+      Output.println(String.format("Original: %-20s  New: %s", fname, NameProcessing.getNewName(fname)));
       assertEquals(String.format("%04d-%02d-%02d_%s", year, month, day, fname), NameProcessing.getNewName(fname));
 
       CommandLineArgs.clCustomStyle = "FILENAME-DD-MM-YYYY_HH.EXT.end";
       fname = "FILEname.eXtension";
-      assertEquals(String.format("FILEname-%02d-%02d-%04d_%02d.eXtension.end", jc.get(Calendar.DAY_OF_MONTH), jc.get(Calendar.MONTH) + 1, jc.get(Calendar.YEAR), jc.get(Calendar.HOUR)), NameProcessing.getNewName(fname));
+      Output.println(String.format("Original: %-20s  New: %s", fname, NameProcessing.getNewName(fname)));
+      assertEquals(String.format("FILEname-%02d-%02d-%04d_%02d.eXtension.end",
+                  jc.get(Calendar.DAY_OF_MONTH),
+                  jc.get(Calendar.MONTH) + 1,
+                  jc.get(Calendar.YEAR),
+                  jc.get(Calendar.HOUR)),
+                  NameProcessing.getNewName(fname));
    }
 }
