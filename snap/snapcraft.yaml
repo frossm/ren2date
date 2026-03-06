@@ -1,4 +1,5 @@
 name: ren2date
+title: Ren2Date
 version: '2.1.0'
 summary: Rename files with predefined or custom time stamps
 description: |
@@ -15,9 +16,10 @@ description: |
 grade: stable
 confinement: strict
 base: core24
+type: app
 
-title: Ren2Date
 website: https://github.com/frossm/ren2date
+contact: ren2date@fross.org
 issues: https://github.com/frossm/ren2date/issues
 icon: graphics/PostIt-512.jpg
 license: MIT
@@ -28,12 +30,16 @@ platforms:
 # Enable faster LZO compression
 compression: lzo
 
+lint:
+  ignore:
+    - library
+
 apps:
   ren2date:
     command: ren2date-wrapper
     environment:
-      PATH: $SNAP/usr/lib/jvm/java-21-openjdk-amd64/bin:$PATH
-      JAVA_HOME: $SNAP/usr/lib/jvm/java-21-openjdk-amd64
+      JAVA_HOME: $SNAP/usr/lib/jvm/java-21-openjdk-$CRAFT_ARCH_BUILD_FOR
+      PATH: $SNAP/usr/lib/jvm/java-21-openjdk-$CRAFT_ARCH_BUILD_FOR/bin:$PATH
 
     plugs:
       - network

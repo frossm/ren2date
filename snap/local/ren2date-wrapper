@@ -1,5 +1,6 @@
 #!/bin/bash
 #
 # Script is a wrapper which runs the application in a bash shell script with the needed options
+# Using JAVA_HOME ensures this works across different architectures and bases
 #
-exec "$SNAP/bin/java" -Djava.util.prefs.userRoot="$SNAP_USER_DATA" -jar "$SNAP/jar/ren2date.jar" "$@"
+exec "$JAVA_HOME/bin/java" -Djava.util.prefs.userRoot="$SNAP_USER_DATA" -jar "$SNAP/jar/ren2date.jar" "$@"
