@@ -1,4 +1,4 @@
-/*--------------------------------------------------------------------------------
+/* ------------------------------------------------------------------------------
  *  Ren2Date - Rename the provided file with a current date timestamp
  *
  *  Copyright (c) 2004-2026 Michael Fross
@@ -14,14 +14,14 @@
  *  copies or substantial portions of the Software.
  *
  *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ *  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ *  SOFTWARE.
  *
- *------------------------------------------------------------------------------*/
+ * ------------------------------------------------------------------------------*/
 package org.fross.ren2date;
 
 import org.fross.library.Format;
@@ -47,7 +47,7 @@ public class Help {
       Output.printColorln(Output.CYAN, Format.CenterText(HELPWIDTH, "https://github.com/frossm/ren2date"));
 
       Output.printColorln(Output.YELLOW, "\nUsage:");
-      Output.printColorln(Output.WHITE, "  java -jar ren2date [-D] [-p STYLE] [-v] [-z] [-h] FileName1.ext [FileName2.ext ...]");
+      Output.printColorln(Output.WHITE, "  java -jar ren2date [-p NUM] [-c STYLE] [-D] [-v] [-q] [-z] [-h] FileName1.ext [FileName2.ext ...]");
 
       Output.printColorln(Output.YELLOW, "\nCommand Line Options:");
       Output.printColorln(Output.WHITE, " -p NUM      Select the style from the predefined templates listed below");
@@ -67,7 +67,8 @@ public class Help {
       Output.printColorln(Output.WHITE, "  - YYYY    Current Year \t - MM      Current Month Number");
       Output.printColorln(Output.WHITE, "  - DD      Current Day Number \t - HH      Current Hour");
       Output.printColorln(Output.WHITE, "  - NN      Current Minute \t - SS      Current Seconds");
-      Output.printColorln(Output.WHITE, "\n  Example:  -c FirewallLog3312_YYYY-MM-DD_HH:NN:SS");
+
+      Output.printColorln(Output.WHITE, "\nExample:  java -jar ren2date.jar -c FirewallLog3312_YYYY-MM-DD_HH:NN:SS");
 
       Output.printColorln(Output.YELLOW, "\nPredefined Styles:");
       Output.printColorln(Output.WHITE, "0 - YYYY-MM-DD_filename.ext \t 1 - YYYY-MM-DD-filename.ext");
