@@ -64,18 +64,18 @@ public class Help {
       Output.printColorln(Output.YELLOW, "\nCustom Style:");
       Output.printColorln(Output.WHITE, "You may include a string with placeholders.  These will be replaced when renaming");
       Output.printColorln(Output.WHITE, "Please note that the placeholders are case sensitive");
-      Output.printColorln(Output.WHITE, "  - YYYY    Current Year \t - MM      Current Month Number");
-      Output.printColorln(Output.WHITE, "  - DD      Current Day Number \t - HH      Current Hour");
-      Output.printColorln(Output.WHITE, "  - NN      Current Minute \t - SS      Current Seconds");
+      Output.printColorln(Output.WHITE, " - YYYY  Current Year \t\t - MM  Current Month Number");
+      Output.printColorln(Output.WHITE, " - DD    Current Day Number \t - HH  Current Hour");
+      Output.printColorln(Output.WHITE, " - NN    Current Minute \t - SS  Current Seconds");
 
       Output.printColorln(Output.WHITE, "\nExample:  java -jar ren2date.jar -c FirewallLog3312_YYYY-MM-DD_HH:NN:SS");
 
       Output.printColorln(Output.YELLOW, "\nPredefined Styles:");
-      Output.printColorln(Output.WHITE, "0 - YYYY-MM-DD_filename.ext \t 1 - YYYY-MM-DD-filename.ext");
-      Output.printColorln(Output.WHITE, "2 - YYYY_MM_DD_filename.ext \t 3 - YYYYMMDD-filename.ext");
-      Output.printColorln(Output.WHITE, "4 - YYYYMMDD_filename.ext \t 5 - MM-DD-YYYY-filename.ext");
-      Output.printColorln(Output.WHITE, "6 - MM_DD_YYYY_filename.ext \t 7 - MMDDYYYY_filename.ext");
-      Output.printColorln(Output.WHITE, "8 - MMDDYYYY-filename.ext \t 9 - filename-YYYY-MM-DD.ext");
+      Output.printColorln(Output.WHITE, "00 - YYYY-MM-DD_filename.ext \t 01 - YYYY-MM-DD-filename.ext");
+      Output.printColorln(Output.WHITE, "02 - YYYY_MM_DD_filename.ext \t 03 - YYYYMMDD-filename.ext");
+      Output.printColorln(Output.WHITE, "04 - YYYYMMDD_filename.ext \t 05 - MM-DD-YYYY-filename.ext");
+      Output.printColorln(Output.WHITE, "06 - MM_DD_YYYY_filename.ext \t 07 - MMDDYYYY_filename.ext");
+      Output.printColorln(Output.WHITE, "08 - MMDDYYYY-filename.ext \t 09 - filename-YYYY-MM-DD.ext");
       Output.printColorln(Output.WHITE, "10 - filename_YYYY_MM_DD.ext \t 11 - filename-YYYYMMDD.ext");
       Output.printColorln(Output.WHITE, "12 - filename_YYYYMMDD.ext \t 13 - filename-MM-DD-YYYY.ext");
       Output.printColorln(Output.WHITE, "14 - filename_MM_DD_YYYY.ext \t 15 - filename-MMDDYYYY.ext");

@@ -1,6 +1,6 @@
 name: ren2date
 title: Ren2Date
-version: '2.1.1'
+version: '2.1.2'
 summary: Rename files with predefined or custom time stamps
 description: |
   Ren2Date is an easy to use flexible time stamping tool
